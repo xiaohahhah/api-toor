@@ -21,6 +21,17 @@
             <artifactId>user-center-api</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.aliyun.mns</groupId>
+            <artifactId>aliyun-sdk-mns</artifactId>
+            <version>1.1.8</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.nmmpa</groupId>
+            <artifactId>wx-service-api</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 
