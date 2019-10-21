@@ -12,9 +12,8 @@
     <packaging>pom</packaging>
     <modules>
 
-        <module>user-service-module</module>
-        <module>field-service-module</module>
 
+        <module>pay-service-module</module>
     </modules>
 
     <dependencies>
@@ -46,6 +45,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>

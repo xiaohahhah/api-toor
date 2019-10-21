@@ -14,8 +14,7 @@
     <modules>
         <module>user-center-api</module>
         <module>field-service-api</module>
-        <module>wx-service-api</module>
-
+        <module>pay-service-api</module>
     </modules>
 
     <dependencies>

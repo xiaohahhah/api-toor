@@ -1,0 +1,12 @@
+ M201909200003      "cusid": "990440148166000",
+                    "appid": "00000003",
+                    "appKey": "a0ea3fa20dbd7bb4d5abf1d59d63bae8"
+
+                    "APPKEY":"313457fd0f494f04ba18bd40ba19176f"商户
+
+        {"unitUrl":"https://vsp.allinpay.com/apiweb/unitorder","unitVersion":"11","h5Url":"https://syb.allinpay.com/apiweb/h5unionpay/unionorder","h5Version":"12","orgid":"100581048160005"}
+
+
+
+支付成功后回调返回参数
+acct=ogxuI5L1VTPPIElEb7KfxB28P1VI&appid=00000003&chnlid=205299480&chnltrxid=4200000412201910184984146780&cmid=310851053&cusid=990440148166000&cusorderid=1234567&fee=0&outtrxid=1234567&paytime=20191018102616&sign=807CF5144928FF80BCEEA90F2BD2850C&signtype=MD5&termauthno=CFT&termrefnum=4200000412201910184984146780&termtraceno=0&trxamt=1&trxcode=VSP501&trxdate=20191018&trxid=111994120000975981&trxreserved=%E6%9D%8E%E7%BA%A2%E6%A2%85%E6%B5%8BDd%E8%AF%95%E6%94%AF%E4%BB%98&trxstatus=0000

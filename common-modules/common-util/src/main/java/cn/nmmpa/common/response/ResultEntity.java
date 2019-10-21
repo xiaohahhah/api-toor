@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Data
 public class ResultEntity<T> implements Serializable {
 
-    private int status;
+    private int code;
 
     private String message;
 
@@ -22,23 +22,26 @@ public class ResultEntity<T> implements Serializable {
     }
 
     public ResultEntity(int status, String message, T data) {
-        this.status = status;
+        this.code = status;
         this.message = message;
         this.data = data;
     }
 
     public ResultEntity(int status, String message) {
-        this.status = status;
+        this.code = status;
         this.message = message;
     }
 
     public ResultEntity(ExceptionEnum exceptionEnum) {
-        this.status = exceptionEnum.code();
+        this.code = exceptionEnum.code();
         this.message = exceptionEnum.message();
     }
 
+    public ResultEntity(T data) {
+        this.data = data;
+    }
     public ResultEntity(ExceptionEnum exceptionEnum , T t) {
-        this.status = exceptionEnum.code();
+        this.code = exceptionEnum.code();
         this.message = exceptionEnum.message();
         this.data = t;
     }
