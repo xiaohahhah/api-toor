@@ -24,7 +24,7 @@ public class MakeIService {
         OutputUtilities.newLine(builder);
         builder.append("/**");
         OutputUtilities.newLine(builder);
-        builder.append(" * @author TanShuai");
+        builder.append(" * @author lhm");
         OutputUtilities.newLine(builder);
         builder.append(" * @version 1.0 " + DateUtil.getSysDate());
         OutputUtilities.newLine(builder);

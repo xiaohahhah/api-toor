@@ -83,7 +83,7 @@ public class MakeEntity {
 //        builder.append(table.getTableName());
 //        builder.append("表的各个元素的取得、设定方法");
 //        OutputUtilities.newLine(builder);
-        builder.append(" * @author TanShuai");
+        builder.append(" * @author lhm");
         OutputUtilities.newLine(builder);
         builder.append(" * @version 1.0 " + DateUtil.getSysDate());
         OutputUtilities.newLine(builder);
