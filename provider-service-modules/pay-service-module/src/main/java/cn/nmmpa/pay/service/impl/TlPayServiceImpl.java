@@ -39,8 +39,8 @@ public class TlPayServiceImpl implements PayService {
         StringBuilder sb = new StringBuilder();
         TreeMap<String, String> params = new TreeMap<String, String>();
         try {
-            params.put("cusid", tlPayProperties.getCusid());
-            params.put("appid", tlPayProperties.getAppid());
+            Map<String, String> map = this.getParams();
+            map.putAll(params);
             params.put("version", "12");
             params.put("trxamt", String.valueOf(payReqVo.getTrxamt()));
             params.put("reqsn", payReqVo.getMerchantOrderNo());
@@ -49,13 +49,10 @@ public class TlPayServiceImpl implements PayService {
             params.put("notify_url", payReqVo.getNotifyUrl());
             params.put("body", payReqVo.getBody());
             params.put("remark", payReqVo.getRemark());
-            params.put("randomstr", SybUtil.getValidatecode(8));
-            params.put("sign", SybUtil.sign(params, tlPayProperties.getAppKey()));
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 sb.append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(),"UTF-8")).append("&");
             }
             String h5Url = TlPayProperties.TlH5Url + "?" + sb.substring(0, sb.length() - 1);
-            System.out.println(h5Url);
             h5ResultVo.setPayUrl(h5Url);
 
         } catch (Exception e) {
@@ -77,26 +74,22 @@ public class TlPayServiceImpl implements PayService {
      */
     @Override
     public ResultEntity<Map<String,String>> scanPay(PayReqVo payReqVo) throws Exception{
-
             HttpConnectionUtil http = new HttpConnectionUtil(TlPayProperties.TlUniUrl+"/scanqrpay");
             http.init();
             TreeMap<String,String> params = new TreeMap<String,String>();
-            params.put("cusid", tlPayProperties.getCusid());
-            params.put("appid", tlPayProperties.getAppid());
+            Map<String, String> map = this.getParams();
+            map.putAll(params);
             params.put("version", "11");
             params.put("trxamt", String.valueOf(payReqVo.getTrxamt()));
             params.put("reqsn", payReqVo.getMerchantOrderNo());
-            params.put("randomstr", SybUtil.getValidatecode(8));
             params.put("body", payReqVo.getBody());
             params.put("remark", payReqVo.getRemark());
             params.put("authcode", payReqVo.getAuthCode());
-            params.put("sign", SybUtil.sign(params,tlPayProperties.getAppKey()));
             byte[] bys = http.postParams(params, true);
             String result = new String(bys,"UTF-8");
-        System.out.println(result);
-            Map<String,String> map = handleResult(result);
-        System.out.println(map);
-            return new ResultEntity<>(map) ;
+            System.out.println(result);
+            Map<String,String> map1 = handleResult(result);
+            return new ResultEntity<>(map1) ;
     }
 
     /**
@@ -109,7 +102,7 @@ public class TlPayServiceImpl implements PayService {
      */
     @Override
     public Object callBack(String params, String type, String notifyType) {
-//        acct=ogxuI5L1VTPPIElEb7KfxB28P1VI&appid=00000003&chnlid=205299480&chnltrxid=4200000412201910184984146780&cmid=310851053&cusid=990440148166000&cusorderid=1234567&fee=0&outtrxid=1234567&paytime=20191018102616&sign=807CF5144928FF80BCEEA90F2BD2850C&signtype=MD5&termauthno=CFT&termrefnum=4200000412201910184984146780&termtraceno=0&trxamt=1&trxcode=VSP501&trxdate=20191018&trxid=111994120000975981&trxreserved=%E6%9D%8E%E7%BA%A2%E6%A2%85%E6%B5%8BDd%E8%AF%95%E6%94%AF%E4%BB%98&trxstatus=0000
+
         return null;
     }
 
@@ -137,21 +130,19 @@ public class TlPayServiceImpl implements PayService {
             HttpConnectionUtil http = new HttpConnectionUtil(TlPayProperties.TlUniUrl+"/refund");
             http.init();
             TreeMap<String,String> params = new TreeMap<String,String>();
-            params.put("cusid", tlPayProperties.getCusid());
-            params.put("appid", tlPayProperties.getAppid());
+            Map<String, String> map = this.getParams();
+            map.putAll(params);
             params.put("version", "11");
             params.put("trxamt", String.valueOf(refundReqVo.getTrxamt()));
             params.put("reqsn", refundReqVo.getReqsn());
             params.put("oldreqsn", refundReqVo.getOldReqsn());
             params.put("oldtrxid", refundReqVo.getOldTrxid());
-            params.put("randomstr", SybUtil.getValidatecode(8));
-            params.put("sign", SybUtil.sign(params,tlPayProperties.getAppKey()));
+
             byte[] bys = http.postParams(params, true);
             String result = new String(bys,"UTF-8");
-            System.out.println("result:"+result);
-           log.info("退款result: {}",result);
-            Map<String,String> map = handleResult(result);
-            return new ResultEntity<>(map);
+            log.info("退款result: {}",result);
+            Map<String,String> map1 = handleResult(result);
+            return new ResultEntity<>(map1);
     }
 
     /**
@@ -182,4 +173,17 @@ public class TlPayServiceImpl implements PayService {
         }
     }
 
+    /**
+     * 相同参数参数封装
+     * @return
+     * @throws Exception
+     */
+    public  Map<String,String> getParams() throws Exception {
+        TreeMap<String,String> params = new TreeMap<String,String>();
+        params.put("cusid", tlPayProperties.getCusid());
+        params.put("appid", tlPayProperties.getAppid());
+        params.put("randomstr", SybUtil.getValidatecode(8));
+        params.put("sign", SybUtil.sign(params,tlPayProperties.getAppKey()));
+        return params;
+    }
 }

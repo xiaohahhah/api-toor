@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.nmmpa.shiro.mappers.UserMapper">
+    <resultMap id="BaseResultMap" type="cn.nmmpa.shiro.model.User">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="account" jdbcType="VARCHAR" property="account" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="reg_time" jdbcType="TIMESTAMP" property="regTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,
+        account,
+        password,
+        username,
+        reg_time
+    </sql>
+    <!-- 往表中插入一条数据 字段为空不插入 系统字段需要输入 -->
+    <insert id="insert" parameterType="cn.nmmpa.shiro.model.User">
+        insert into
+            user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="regTime != null">
+                reg_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="regTime != null">
+                #{regTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <!-- 往表中批量插入数据 系统字段需要输入 -->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into
+            user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            account,
+            password,
+            username,
+            reg_time,
+        </trim>
+        <foreach collection="list" item="item" open="values (" close=")" separator=" ), ( ">
+            <trim suffixOverrides=",">
+                #{item.id,jdbcType=INTEGER},
+                #{item.account,jdbcType=VARCHAR},
+                #{item.password,jdbcType=VARCHAR},
+                #{item.username,jdbcType=VARCHAR},
+                #{item.regTime,jdbcType=TIMESTAMP},
+            </trim>
+        </foreach>
+    </insert>
+    <!-- 根据主键查询数据 所有数据 -->
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List" />
+        from
+            user
+        where
+            id = #{id}
+    </select>
+    <!-- 根据主键修改数据 字段为空不修改 所有数据 -->
+    <update id="updateById" parameterType="cn.nmmpa.shiro.model.User">
+        update
+            user
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="regTime != null">
+                reg_time = #{regTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where
+            id = #{id,jdbcType=INTEGER}
+    </update>
+    <!-- 根据主键删除数据 物理删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from
+            user
+        where
+            id = #{id}
+    </delete>
+    <!-- 按条件查询 对象 -->
+    <select id="queryConditionsToObject" parameterType="cn.nmmpa.shiro.model.User" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List" />
+        from
+            user
+        <where>
+            <if test="id != null">
+                 AND id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="account != null">
+                 AND account = #{account,jdbcType=VARCHAR}
+            </if>
+            <if test="password != null">
+                 AND password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="username != null">
+                 AND username = #{username,jdbcType=VARCHAR}
+            </if>
+            <if test="regTime != null">
+                 AND reg_time = #{regTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+    <!-- 按条件查询 对象 -->
+    <select id="queryConditionsToList" parameterType="cn.nmmpa.shiro.model.User" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List" />
+        from
+            user
+        <where>
+            <if test="id != null">
+                 AND id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="account != null">
+                 AND account = #{account,jdbcType=VARCHAR}
+            </if>
+            <if test="password != null">
+                 AND password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="username != null">
+                 AND username = #{username,jdbcType=VARCHAR}
+            </if>
+            <if test="regTime != null">
+                 AND reg_time = #{regTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>
