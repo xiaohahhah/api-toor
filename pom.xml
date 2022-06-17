@@ -44,7 +44,7 @@
         <pagehelper.version>1.2.3</pagehelper.version>
         <autoconfigure.version>1.2.3</autoconfigure.version>
         <redisson.version>3.10.3</redisson.version>
-        <fastJson.version>1.2.56</fastJson.version>
+        <fastJson.version>1.2.83</fastJson.version>
         <swagger.version>2.6.1</swagger.version>
         <swagger-bootstrap-ui.version>1.9.4</swagger-bootstrap-ui.version>
         <jackson-databind.version>2.9.9</jackson-databind.version>
