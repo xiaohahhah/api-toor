@@ -72,7 +72,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.build.version>1.8</java.build.version>
 
-        <poi_version>3.17</poi_version>
+        <poi_version>4.1.1</poi_version>
     </properties>
 
     <dependencies>
